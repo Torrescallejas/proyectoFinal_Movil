@@ -1,0 +1,518 @@
+#:kivy 2.1.0
+#:import utils kivy.utils
+
+ScreenManager:
+    LoginScreen:
+    MainScreen:
+    StatsScreen:
+
+<LoginScreen>:
+    name: 'login'
+
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'center_x': 0.5}
+        padding: 0, 0, 0, 95
+        spacing: 100
+        size: self.width, self.height
+
+        BoxLayout:
+            pos_hint: {'center_x': .5}
+            size: 250, 150
+            size_hint: (None,None)
+
+            Image:
+                source: 'img/spimanager_logo_dark_theme.png'
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 15
+            pos_hint: {'center_x': .5}
+            padding: 0, 0, 0, 0
+            size: 250, 250
+            size_hint: (None,None)
+
+            MDLabel:
+                id: lblLogo
+                halign: 'center'
+                text: 'SPI Manager'
+                font_style: 'H5'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size: self.width, 100
+                size_hint_y: None
+
+                MDLabel:
+                    id: lblUsuario
+                    halign: 'left'
+                    text: 'Correo electronico'
+
+                MDTextField:
+                    id: txtUsuario
+                    pos_hint: {'center_x': 0.5}
+                    hint_text: 'Correo electronico'
+                    size_hint_x: 1
+                    mode: 'round'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size: self.width, 100
+                size_hint_y: None
+
+                MDLabel:
+                    id: lblContrasena
+                    halign: 'left'
+                    text: 'Contraseña'
+
+                MDTextField:
+                    id: txtContrasena
+                    password: True
+                    password_mask: '*'
+                    pos_hint: {'center_x': 0.5}
+                    hint_text: 'Ingresar Contraseña'
+                    size_hint_x: 1
+                    mode: 'round'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size: self.width, 50
+                size_hint_y: None
+
+                MDRectangleFlatButton:
+                    id: btnLogin
+                    text: 'Iniciar Sesion'
+                    pos_hint: {'center_x': 0.5}
+                    text_color: (1,1,1,1)
+                    line_color: (1,1,1,1)
+                    on_release: root.btnLoginInputs()
+
+<MainScreen>
+    name: 'main'
+
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: 0.45,0.45, 0.48
+
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        orientation: 'vertical'
+        pos_hint: {'center_x': 0.5}
+        padding: 0, 5.5, 0, 0
+        spacing: 0
+        size: self.width, self.height
+
+        BoxLayout:
+            pos_hint: {'center_x': 0.5}
+            size: 425, self.height
+            size_hint: (None, None)
+
+            MDLabel:
+                id: lblTitulo
+                text: 'Titulo'
+                halign: 'center'
+                font_style: 'H4'
+
+        BoxLayout:
+            pos_hint: {'center_x': 0.5}
+            size: 400, self.height
+            size_hint_x: None
+
+            ScrollView:
+                size: self.width, self.height
+                do_scroll_x: False
+
+                GridLayout:
+                    canvas:
+                        Color:
+                            rgb: 0,0,0
+
+                        RoundedRectangle:
+                            size: 397, self.height
+                            pos: self.pos
+                            radius: [(15, 15), (15, 15), (0,0), (0,0)]
+
+                    cols: 1
+                    rows: 4
+                    padding: 10.5,7,0,0
+                    spacing: 5
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    BoxLayout:
+                        canvas:
+                            Color:
+                                rgb: 0.25, 0.25, 0.28
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [(15, 15), (15, 15), (15, 15), (15, 15)]
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.0}
+                        size_hint: (None,None)
+                        size: (375, 200)
+                        padding: 5.0, 0, 5.5, 0
+
+                        GridLayout:
+                            cols: 1
+                            rows: 3
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDLabel:
+                                    text: 'Ventas Totales'
+                                    halign: 'left'
+                                    font_style: 'H5'
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                spacing: 5
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDRectangleFlatButton:
+                                    text:'Dia'
+                                    text_color: (1,1,1,1)
+                                    line_color: (1,1,1,1)
+                                    on_release: root.updateDay()
+
+                                MDRectangleFlatButton:
+                                    text:'Semana'
+                                    text_color: (1,1,1,1)
+                                    line_color: (1,1,1,1)
+                                    on_release: root.updateWeek()
+
+                            BoxLayout:
+                                MDLabel:
+                                    id: lblVentasTotales
+                                    text: 'Contenido1'
+                                    halign: 'center'
+                                    font_style: 'H5'
+
+
+                    BoxLayout:
+                        canvas:
+                            Color:
+                                rgb: 0.25, 0.25, 0.28
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [(15, 15), (15, 15), (15, 15), (15, 15)]
+                        size: (375, 200)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.0}
+                        size_hint: (None,None)
+                        padding: 5.5, 0, 0, 0
+
+                        GridLayout:
+                            cols: 1
+                            rows: 3
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDLabel:
+                                    text: 'Platillo mas vendido'
+                                    halign: 'left'
+                                    font_style: 'H5'
+
+                            BoxLayout:
+                                MDLabel:
+                                    id: lblPlatillo
+                                    text: 'Contenido2'
+                                    halign: 'center'
+                                    font_style: 'H5'
+
+
+                    BoxLayout:
+                        canvas:
+                            Color:
+                                rgb: 0.25, 0.25, 0.28
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [(15, 15), (15, 15), (15, 15), (15, 15)]
+                        size: (375, 200)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.0}
+                        size_hint: (None,None)
+                        padding: 5.5, 0, 0, 0
+
+                        GridLayout:
+                            cols: 1
+                            rows: 3
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDLabel:
+                                    text: 'Bebida mas vendida'
+                                    halign: 'left'
+                                    font_style: 'H5'
+
+                            BoxLayout:
+                                MDLabel:
+                                    id: lblBebida
+                                    text: 'Contenido3'
+                                    halign: 'center'
+                                    font_style: 'H5'
+    
+        BoxLayout:
+            canvas:
+                Color:
+                    rgb: 0.15,0.15,0.15
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            orientation: 'vertical'
+            padding: 0, 15, 0, 2.5
+            spacing: 0
+            size: self.width, 100
+            size_hint_y: None
+
+            BoxLayout:
+                spacing: 50
+                pos_hint: {'center_x': 0.5}
+                size: 200, self.height
+                size_hint_x: None
+
+                MDIconButton:
+                    id: btnDatosGenerales
+                    icon: 'img/generales_icono.png'
+                    icon_size: '50sp'
+                    on_release: root.btnDatosGeneralesInputs()
+
+                MDIconButton:
+                    id: btnEstadisticas
+                    icon: 'img/graficos_icono.png'
+                    icon_size: '50sp'
+                    on_release: root.btnEstadisticasInputs()
+
+<StatsScreen>
+    name: 'stats'
+
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: 0.45,0.45, 0.48
+
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        orientation: 'vertical'
+        pos_hint: {'center_x': 0.5}
+        padding: 0, 5.5, 0, 0
+        spacing: 0
+        size: self.width, self.height
+
+        BoxLayout:
+            id: bxlTitulo
+            pos_hint: {'center_x': 0.5}
+            size: 425, self.height
+            size_hint: (None, None)
+
+            MDLabel:
+                id: lblTitulo
+                text: 'Titulo'
+                halign: 'center'
+                font_style: 'H4'
+
+        BoxLayout:
+            pos_hint: {'center_x': 0.5}
+            size: 400, self.height
+            size_hint_x: None
+
+            ScrollView:
+                size: self.width, self.height
+                do_scroll_x: False
+
+                GridLayout:
+                    canvas:
+                        Color:
+                            rgb: 0,0,0
+
+                        RoundedRectangle:
+                            size: 397, self.height
+                            pos: self.pos
+                            radius: [(15, 15), (15, 15), (0,0), (0,0)]
+
+                    cols: 1
+                    rows: 4
+                    padding: 10.5,7,0,0
+                    spacing: 5
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    BoxLayout:
+                        canvas:
+                            Color:
+                                rgb: 0.25, 0.25, 0.28
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [(15, 15), (15, 15), (15, 15), (15, 15)]
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.0}
+                        size_hint: (None,None)
+                        size: (375, 500)
+                        padding: 5.0, 0, 5.5, 0
+
+                        GridLayout:
+                            cols: 1
+                            rows: 3
+                            spacing: 7
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDLabel:
+                                    text: 'Ventas Totales'
+                                    halign: 'left'
+                                    font_style: 'H5'
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                spacing: 5
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDRectangleFlatButton:
+                                    text:'Semanal'
+                                    text_color: (1,1,1,1)
+                                    line_color: (1,1,1,1)
+
+                            BoxLayout:
+                                id: bxlVentasTotales
+                                size: (365,350)
+                                size_hint: None,None
+
+
+                    BoxLayout:
+                        canvas:
+                            Color:
+                                rgb: 0.25, 0.25, 0.28
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [(15, 15), (15, 15), (15, 15), (15, 15)]
+                        size: (375, 500)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.0}
+                        size_hint: (None,None)
+                        padding: 5.5, 0, 0, 0
+
+                        GridLayout:
+                            cols: 1
+                            rows: 3
+                            spacing: 7
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDLabel:
+                                    text: 'Platillos Mas Vendidos'
+                                    halign: 'left'
+                                    font_style: 'H5'
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                spacing: 5
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDRectangleFlatButton:
+                                    text:'Semana'
+                                    text_color: (1,1,1,1)
+                                    line_color: (1,1,1,1)
+
+                            BoxLayout:
+                                id: bxlPlatillos
+                                size: (365,350)
+                                size_hint: None,None
+
+                    BoxLayout:
+                        canvas:
+                            Color:
+                                rgb: 0.25, 0.25, 0.28
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [(15, 15), (15, 15), (15, 15), (15, 15)]
+                        size: (375, 500)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.0}
+                        size_hint: (None,None)
+                        padding: 5.5, 0, 0, 0
+
+                        GridLayout:
+                            cols: 1
+                            rows: 3
+                            spacing: 7
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDLabel:
+                                    text: 'Platillos Mas Vendidos'
+                                    halign: 'left'
+                                    font_style: 'H5'
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                spacing: 5
+                                size: (375,45)
+                                size_hint: (None, None)
+
+                                MDRectangleFlatButton:
+                                    text:'Semana'
+                                    text_color: (1,1,1,1)
+                                    line_color: (1,1,1,1)
+
+                            BoxLayout:
+                                id: bxlBebidas
+                                size: (365,350)
+                                size_hint: None,None
+
+        BoxLayout:
+            canvas:
+                Color:
+                    rgb: 0.15,0.15,0.15
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            orientation: 'vertical'
+            padding: 0, 15, 0, 2.5
+            spacing: 0
+            size: self.width, 100
+            size_hint_y: None
+
+            BoxLayout:
+                spacing: 50
+                pos_hint: {'center_x': 0.5}
+                size: 200, self.height
+                size_hint_x: None
+
+                MDIconButton:
+                    id: btnDatosGenerales
+                    icon: 'img/generales_icono.png'
+                    icon_size: '50sp'
+                    on_release: root.btnDatosGeneralesInputs()
+
+                MDIconButton:
+                    id: btnEstadisticas
+                    icon: 'img/graficos_icono.png'
+                    icon_size: '50sp'
+                    on_release: root.btnEstadisticasInputs()
